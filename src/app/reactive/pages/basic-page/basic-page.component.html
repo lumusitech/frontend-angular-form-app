@@ -3,51 +3,54 @@
 
 <div class="row">
   <div class="col">
-    <form autocomplete="off">
+    <form autocomplete="off" (ngSubmit)="onSave()" [formGroup]="myForm">
       <!-- Campo de producto -->
       <div class="mb-3 row">
-        <label class="col-sm-3 col-form-label">Producto</label>
+        <label class="col-sm-3 col-form-label">Product</label>
         <div class="col-sm-9">
           <input
+            formControlName="name"
             type="text"
             class="form-control"
             placeholder="Nombre del producto"
           />
 
-          <span class="form-text text-danger">
+          <span class="form-text text-danger" *ngIf="isValidField('name')">
             <!-- Debe de ser de 3 letras -->
-            error message
+            {{ getFieldError("name") }}
           </span>
         </div>
       </div>
 
       <!-- Campo de producto -->
       <div class="mb-3 row">
-        <label class="col-sm-3 col-form-label">Precio</label>
+        <label class="col-sm-3 col-form-label">Price</label>
         <div class="col-sm-9">
           <input
+            formControlName="price"
             type="number"
             class="form-control"
             placeholder="Precio del producto"
           />
-          <span class="form-text text-danger">
-            El precio debe de ser 0 o mayor
+          <span class="form-text text-danger" *ngIf="isValidField('price')">
+            price must be greater than 0
           </span>
         </div>
       </div>
 
       <!-- Campo de existencias -->
       <div class="mb-3 row">
-        <label class="col-sm-3 col-form-label">Existencias</label>
+        <label class="col-sm-3 col-form-label">Storage</label>
         <div class="col-sm-9">
           <input
+            formControlName="inStorage"
             type="number"
             class="form-control"
             placeholder="Existencias del producto"
           />
 
-          <span class="form-text text-danger">
-            Las existencias deben de ser 0 o mayor
+          <span class="form-text text-danger" *ngIf="isValidField('inStorage')">
+            Storage must be greater than 0
           </span>
         </div>
       </div>
@@ -66,21 +69,27 @@
 <div class="row">
   <div class="col">
     <span>Valid</span>
-    <pre>{{ "objeto" | json }}</pre>
+    <pre>{{ myForm.valid | json }}</pre>
 
     <span>Pristine</span>
-    <pre>{{ "objeto" | json }}</pre>
+    <pre>{{ myForm.pristine | json }}</pre>
 
     <span>Touched</span>
-    <pre>{{ "objeto" | json }}</pre>
+    <pre>{{ myForm.touched | json }}</pre>
 
     <span>Value</span>
-    <pre>{{ "objeto" | json }}</pre>
+    <pre>{{ myForm.value | json }}</pre>
 
-    <span>Precio</span>
-    <pre>{{ "objeto" | json }}</pre>
+    <span>Price</span>
+    <pre>{{ myForm.controls["price"].value | json }}</pre>
 
-    <span>Producto</span>
-    <pre>{{ "objeto" | json }}</pre>
+    <span>Price Errors</span>
+    <pre>{{ myForm.controls["price"].errors | json }}</pre>
+
+    <span>Product</span>
+    <pre>{{ myForm.controls["name"].value | json }}</pre>
+
+    <span>Product Errors</span>
+    <pre>{{ myForm.controls["name"].errors | json }}</pre>
   </div>
 </div>
