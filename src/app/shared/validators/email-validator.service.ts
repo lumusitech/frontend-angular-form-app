@@ -32,6 +32,4 @@ export class EmailValidatorService implements AsyncValidator {
 
     return httpCallObservable;
   };
-
-  constructor() {}
 }
